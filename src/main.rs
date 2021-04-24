@@ -6,15 +6,13 @@ fn main() {
     let args: Vec<String> = std::env::args().collect();
     let command = args[1].as_str();
 
-    let brightness_val = read_int_from_file(BRIGHTNESS_FILEPATH);
-    let max_brightness_val = read_int_from_file(MAX_BRIGHTNESS_FILEPATH);
+    let brightness_val = read_uint_from_file(BRIGHTNESS_FILEPATH);
+    let max_brightness_val = read_uint_from_file(MAX_BRIGHTNESS_FILEPATH);
 
     match command {
         "set" => {
-            let new_value: u8 = args[2].parse().expect("Could not parse string to u8");
-
-            std::fs::write(BRIGHTNESS_FILEPATH, new_value.to_string())
-                .expect("Error setting new brightness");
+            let new_value = &args[2];
+            std::fs::write(BRIGHTNESS_FILEPATH, new_value).expect("Error setting new brightness");
         }
 
         "inc" => {
@@ -44,7 +42,7 @@ fn main() {
     }
 }
 
-fn read_int_from_file(path: &str) -> u8 {
+fn read_uint_from_file(path: &str) -> u8 {
     let mut content = std::fs::read_to_string(path).expect("Error opening a file");
 
     if content.ends_with('\n') {
