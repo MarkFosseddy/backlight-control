@@ -55,7 +55,7 @@ fn read_uint_from_file(path: &str) -> u8 {
 fn get_brightness_level(brightness: u8, max_brightness: u8) -> String {
     let length = max_brightness / STEP;
     let filled_length = brightness / STEP;
-    let mut bars = format!("{}/{} ", filled_length, length);
+    let mut bars = format!("{:2}/{} ", filled_length, length);
 
     for v in 0..length {
         if v < filled_length {
