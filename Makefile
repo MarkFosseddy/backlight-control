@@ -1,2 +1,2 @@
-compile: main.rs
-	rustc -O main.rs -o backlight-control
+compile: backlight-control.rs
+	rustc -O backlight-control.rs
